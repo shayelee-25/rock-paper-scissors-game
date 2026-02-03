@@ -1,40 +1,66 @@
-console.log("Hello, World!")
+// logic to collect a randomized choice from the computer
+let computerInput = Math.floor(Math.random() * 100) + 1;
+function getComputerChoice () {
+    if (computerInput <= 33) {
+       return "rock";
+    } else if (computerInput > 33 && computerInput <= 66) {           
+       return "paper"; 
+    } 
+      return "scissors";
+} 
+//console.log(getComputerChoice())
 
-// Used the Math.random method and if/else if conditional to get return value in the form of a string; rock, paper, scissors
-let computerChoice = Math.floor(Math.random() * 100) + 1;
-function getComputerChoice (computerChoice) {
-    if (computerChoice <= 33) {
-        return "Rock";
-    } else if (computerChoice > 33 && computerChoice <= 66) {           
-        return "Paper"
-    } else {
-        return "Scissors";
-    } }
-
- // "message" variable and prompt must be inside getHumanChoice function in order to trigger the input request everytime function is used
+// prompt to collect user's choice
+const userInput = prompt("Please type your choice: rock, paper, scissors").toLowerCase();
 function getHumanChoice() {
-    let answer = prompt("Please type your choice: Rock, Paper, Scissors");
-}
+    return userInput;
+} 
+//console.log(getHumanChoice())
 
+
+// variables to correlate collected input and parameters for playRound
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice();
+
+// logic for a single round of the game
 function playRound(humanChoice, computerChoice) {
-    let result;
     if ( 
-        (humanChoice === "Rock" && computerChoice === "Rock") || (humanChoice === "Paper" && computerChoice === "Paper") || (humanChoice === "Scissors" && computerChoice === "Scissors")) {
-        result = "Oops! You tied, try again!";
+        (humanChoice === "rock" && computerChoice === "scissors") || (humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper")) {
+        humanScore += 1;
+        return "Yay, you won this round!";
     } else if (
-        (humanChoice === "Rock" && computerChoice === "Paper") || (humanChoice === "Paper" && computerChoice === "Scissors") || (humanChoice === "Scissors" && computerChoice === "Rock")) {
-        result = "Oh no, you lost this round!";
-    } else {
-        result = "Yay, you win this round!";} 
-        return result; }
+        (humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
+        computerScore += 1;
+        return "Oh no, you lost this round!";
+    } 
+        return "Oops! You tied, try again!";
+} 
+//console.log(playRound(humanChoice, computerChoice))
 
-let humanScore = 0;
+// scoring variables
+let humanScore = 0; 
 let computerScore = 0;
 
-humanScore += 1;
-computerScore += 1;
 
+function playGame() {
+    for (i = 0; i < 5; i++ ) { 
+       console.log(getHumanChoice())
+       console.log(getComputerChoice())
+       console.log(playRound());
+       console.log(`User: ${humanScore}`, `Computer: ${computerScore}`)
+    }
+    displayResults();
+} 
+//console.log(playGame())
 
+// logic to display results at the end of the game
+function displayResults() {
+    if (humanScore > computerScore) {
+        console.log(`You won the game, ${humanScore} - ${computerScore}!`);
+    } else (humanScore < computerScore) 
+        console.log(`You lost ${humanScore} - ${computerScore}, better luck next time!`);
+    } 
+playGame();
 
 /* Create function getComputerChoice
     function returns string values: "rock", "paper", or "scissors"
