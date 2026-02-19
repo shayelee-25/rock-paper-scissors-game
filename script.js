@@ -1,105 +1,87 @@
 // function to collect a randomized choice from the computer
-const input = ["rock", "paper", "scissors"];
-let computerInput = input[Math.floor(Math.random() * input.length)];function getComputerChoice() {
+function getComputerChoice() {
+    const input = ["rock", "paper", "scissors"];
+    const computerInput = input[Math.floor(Math.random() * input.length)];
     if (computerInput === "rock") {
-        return "Computer chose: rock";
+        return "rock";
     } else if (computerInput === "paper") {           
-       return "Computer chose: paper"; 
+       return "paper"; 
     } 
-       return "Computer chose: scissors";
+       return "scissors";
 } 
-console.log(getComputerChoice())
 
 // scoring variables
 let humanScore = 0; 
 let computerScore = 0;
 
+scoreContainer = document.querySelector("#scoreContainer");
+const score = document.createElement("h3");
+scoreContainer.appendChild(score);
+
 // single round of the game
-function playRound(humanChoice, computerChoice) {
-    computerChoice = getComputerChoice();
-    //console.log(humanInput);
-    //console.log(getComputerChoice());
+results = document.querySelector("#results");
+
+function playRound() {
+    getComputerChoice();
+    const roundResults = document.createElement("p");
+    let computerChoice = getComputerChoice();
     if ( 
         (humanChoice === "rock" && computerChoice === "scissors") || (humanChoice === "paper" && computerChoice === "rock") || (humanChoice === "scissors" && computerChoice === "paper")) {
         humanScore++;
-        return "Yay, you won this round!";
+        roundResults.textContent = "Yay, you won this round!";
     } else if (
         (humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "rock")) {
         computerScore++;
-        return "Oh no, you lost this round!";
+        roundResults.textContent =  "Oh no, you lost this round!";
+    } else if (
+        (humanChoice === "rock" && computerChoice === "rock") ||
+        (humanChoice === "paper" && computerChoice === "paper") ||
+        (humanChoice === "scissors" && computerChoice === "scissors")) {
+        roundResults.textContent =  "Oops! You tied, try again!"; 
     }
-        return "Oops! You tied, try again!";
+    results.appendChild(roundResults);
+    score.textContent = ("You: " + humanScore + " Computer: " + computerScore);
 } 
-//console.log(playRound())
-// display results at the end of the game
-function displayResults() {
-    if (humanScore === 5) {
-        return `You won the game, ${humanScore} - ${computerScore}!`;
-    } else if (computerScore === 5) {
-        return `You lost ${humanScore} - ${computerScore}, better luck next time!`;
-    } else {
-        return "No winner this game, refresh page to play again!";
-    }
-}
 
-const rockBtn = document.createElement("button");
-rockBtn.textContent = "rock";
-rockBtn.style.fontSize = "12px";
-rockBtn.style.margin = "6px";
-const paperBtn = document.createElement("button");
-paperBtn.textContent = "paper";
-paperBtn.style.fontSize = "12px";
-paperBtn.style.margin = "6px";
-const scissorsBtn = document.createElement("button");
-scissorsBtn.textContent = "scissors";
-scissorsBtn.style.fontSize = "12px";
-scissorsBtn.style.margin = "6px";
-const buttonContainer = document.querySelector("#buttonContainer");
-buttonContainer.appendChild(rockBtn);
-buttonContainer.appendChild(paperBtn);
-buttonContainer.appendChild(scissorsBtn);
+// set up for event listeners
+const rockBtn = document.querySelector("#rock");
+const paperBtn = document.querySelector("#paper");
+const scissorsBtn = document.querySelector("#scissors");
+const buttons = document.querySelectorAll("button");
 
-buttonContainer.addEventListener("click", (event) => {
-    let selection = event.target
-
-    if (selection === rockBtn) {
-        selection = "rock";
-    } else if (selection === paperBtn) {
-        selection = "paper";
-    } selection = "scissors";
-
-    const humanSelection = document.createElement("div");
-    humanSelection.textContent = "You chose:" + `${selection}`;
-    humanSelection.style.fontSize = "18px";
-    const computerSelection = document.createElement("div");
-    computerSelection.textContent = `${getComputerChoice()}`;
-    computerSelection.style.fontSize = "18px";
-    const selectionContainer = document.querySelector("#selectionContainer");
-
-    selectionContainer.appendChild(humanSelection);
-    selectionContainer.appendChild(computerSelection);
+rockBtn.addEventListener("click", () => {
+    humanChoice = "rock";
+    playRound();
+    displayResults();
 });
 
-const scoreContainer = document.querySelector("#scoreContainer");
-scoreContainer.textContent = "Score: ";
-scoreContainer.style.fontSize = "18px";
-/*
+paperBtn.addEventListener("click", () => {
+    humanChoice = "paper";
+    playRound();
+    displayResults();
+});
 
-const showHumanScore = `${humanScore}`;
-showHumanScore.textContent = "You: " + `${humanScore}`;
-//showHumanScore.style.fontSize = "18px";
-const showComputerScore = `${computerScore}`;
-showComputerScore.textContent = "Computer: " + `${computerScore}`;
-//showComputerScore.style.fontSize = "18px";
-scoreContainer.appendChild(showHumanScore);
-scoreContainer.appendChild(showComputerScore);
+scissorsBtn.addEventListener("click", () => {
+    humanChoice = "scissors";
+    playRound();
+    displayResults();
+});
 
-
-
-
-
-
-
+// display results at the end of the game
+function displayResults() {
+    const gameResults = document.createElement("h3");
+    if (humanScore === 5) {
+        gameResults.textContent = `You won the game, ${humanScore} - ${computerScore}!`;
+        results.appendChild(gameResults);
+        humanScore = 0;
+        computerScore = 0;
+    } else if (computerScore === 5) {
+        gameResults.textContent = `You lost ${humanScore} - ${computerScore}, better luck next time!`;
+        results.appendChild(gameResults);
+        humanScore = 0;
+        computerScore = 0;
+    }
+}
 
 /*
 // sets game to be a total of 5 rounds
@@ -114,4 +96,5 @@ function playGame() {
 }
 
 // starts game
-playGame(); */
+playGame(); 
+*/
