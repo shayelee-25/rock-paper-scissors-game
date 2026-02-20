@@ -1,0 +1,70 @@
+html {
+    background-color: rgb(110, 100, 117);
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#title {
+    color: rgb(255, 221, 227);
+    font-size: 50px;
+}
+
+#subtitle {
+    color: rgb(244, 210, 215);  
+    font-size: 20px;
+    padding: -5px;
+}
+
+#buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+button {
+    display: flex;
+    background-color: white;
+    color: rgb(110, 100, 117);
+    font-size: 25px;
+    padding: 8px 16px;
+    border-color: rgb(85, 74, 93);
+    border-radius: 12px;
+    border-style: double;
+}
+
+#scoreContainer {
+    display: flex;
+    background-color: white;
+    color: rgb(110, 100, 117);
+    width: 200px;
+    max-height: 55px;
+    padding: 8px 16px;
+    justify-content: center;
+    border: rgb(85, 74, 93) double;
+    border-radius: 12px;
+}
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    width: 380px;
+    color: white;
+    justify-content: center;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
