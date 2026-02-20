@@ -4,22 +4,21 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Game</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div id="header">
             <h1 id="title">Rock Paper Scissors</h1>
-            <p id="subtitle">Please make your choice...</p>
+            <p id="subtitle">The first player to get to 5 points is the winner, please make your choice to begin the game...</p>
         </div>
         <div id="buttonContainer">
             <button id="rock">rock</button>
             <button id="paper">paper</button>
             <button id="scissors">scissors</button>
         </div>
-        <div id="selectionContainer">
-            <div class="human">You chose: </div>
-            <div class="computer">Computer chose: </div>
-        </div>
-        <div id="scoreContainer">
+        <div id="content">
+            <div id="scoreContainer"></div>
+            <div id="results"></div>
         </div>
         <script src="script.js"></script>
     </body>
